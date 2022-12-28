@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <span>
+    <a routerLink="/">Overcooked</a>
+  </span>
+  <span class="spacer"></span>
+  <ul>
+    <li>
+      <a mat-raised-button routerLink="/ingredient" routerLinkActive="mat-accent">Ingrédients</a>
+    </li>
+    <li>
+      <a mat-raised-button routerLink="/meal" routerLinkActive="mat-accent" style="margin-left: 1rem;">Repas</a>
+    </li>
+    <li>
+      <a mat-raised-button routerLink="/recipe" routerLinkActive="mat-accent" style="margin-left: 1rem;">Recette</a>
+    </li>
+    <li>
+      <a mat-raised-button routerLink="/pantry" routerLinkActive="mat-accent" style="margin-left: 1rem;">Garde Manger</a>
+    </li>
+    <li>
+      <a mat-raised-button routerLink="/todoItem" routerLinkActive="mat-accent" style="margin-left: 1rem;">Todo List</a>
+    </li>
+  </ul>
+
+  <ul>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/auth/login" routerLinkActive="mat-accent">Connexion</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/auth/signup" routerLinkActive="mat-accent">Inscription</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <button mat-button (click)="onLogout()">Déconnexion</button>
+    </li>
+  </ul>
+</mat-toolbar>

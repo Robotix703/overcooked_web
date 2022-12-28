@@ -1,0 +1,98 @@
+<h2 class="title">{{prettyRecipeData.category}} - {{prettyRecipeData.title}}</h2>
+
+<div style="height: auto;">
+  <mat-grid-list cols="4" rowHeight="1:1">
+    <mat-grid-tile [colspan]=1>
+      <div style="width: 80%;">
+        <div class="recipeInfo">
+          Nombre de repas : {{prettyRecipeData.numberOfLunch}}
+        </div>
+        <div class="recipeInfo">
+          Durée : {{prettyRecipeData.duration}} Minutes
+        </div>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=1>
+      <mat-list style="width: 80%;">
+        <div *ngFor="let ingredient of ingredientListPart1">
+          <mat-list-item style="margin-top: 2rem; margin-bottom: 1rem;">
+            <div style="margin-right: 1rem;">
+              <img class="ingredient-image" [src]="ingredient.ingredient.imagePath" [alt]="ingredient.ingredient.name">
+            </div>
+            <div>
+              {{ingredient.ingredient.name}} - {{ingredient.quantity}} {{ingredient.ingredient.unitOfMeasure}}
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=1>
+      <mat-list style="width: 80%;">
+        <div *ngFor="let ingredient of ingredientListPart2">
+          <mat-list-item style="margin-top: 2rem; margin-bottom: 1rem;">
+            <div style="margin-right: 1rem;">
+              <img class="ingredient-image" [src]="ingredient.ingredient.imagePath" [alt]="ingredient.ingredient.name">
+            </div>
+            <div>
+              {{ingredient.ingredient.name}} - {{ingredient.quantity}} {{ingredient.ingredient.unitOfMeasure}}
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]=1>
+      <mat-list style="width: 80%;">
+        <div *ngFor="let ingredient of ingredientListPart3">
+          <mat-list-item style="margin-top: 2rem; margin-bottom: 1rem;">
+            <div style="margin-right: 1rem;">
+              <img class="ingredient-image" [src]="ingredient.ingredient.imagePath" [alt]="ingredient.ingredient.name">
+            </div>
+            <div>
+              {{ingredient.ingredient.name}} - {{ingredient.quantity}} {{ingredient.ingredient.unitOfMeasure}}
+            </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<mat-accordion *ngIf="prettyRecipeData.instructions.length > 0" style="margin-top: 1rem;">
+  <mat-card *ngFor="let instruc of prettyRecipeData.instructions" style="max-width: 20rem;">
+    <mat-dialog-content>
+      <div class="instruction-text" style="white-space: pre-line;">
+        {{ instruc.text }}
+      </div>
+      <div *ngIf="instruc.cookingTime" style="margin-bottom: 1rem;">
+        <mat-icon>timer</mat-icon> {{ instruc.cookingTime }} minutes de cuisson.
+      </div>
+      <table mat-table [dataSource]="instruc.composition" class="mat-elevation-z8">
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!--Quantity Column-->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantité </th>
+          <td mat-cell *matCellDef="let element"> {{element.quantity}} - {{element.unitOfMeasure}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <div>
+
+      </div>
+    </mat-dialog-content>
+  </mat-card>
+</mat-accordion>
+
+<p class="info-text mat-body-1" *ngIf="prettyRecipeData.instructions.length == 0">Aucune Instructions</p>

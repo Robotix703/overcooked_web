@@ -1,0 +1,46 @@
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 1rem;
+    color: rgb(14, 180, 102);
+}
+
+.recipeInfo{
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: rgb(255, 255, 255);
+}
+
+.instruction-text {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+mat-card {
+    margin-top: 1rem;
+    width: 20rem;
+    margin: 10px;
+}
+
+mat-accordion {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+table {
+    width: 100%;
+}
+
+.instruction-header {
+    margin: 1rem;
+    position: relative;
+    text-align: center;
+}
+
+.ingredient-image{
+    max-width: 75px;
+    height: auto;
+}

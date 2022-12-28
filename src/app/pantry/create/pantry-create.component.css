@@ -1,0 +1,22 @@
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 1rem;
+    color: rgb(14, 180, 102);
+}
+
+.main-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-card {
+    margin-top: 1rem;
+    width: 50%;
+}
+
+mat-form-field,
+textarea {
+    width: 100%;
+}

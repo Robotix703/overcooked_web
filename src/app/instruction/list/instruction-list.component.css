@@ -1,0 +1,34 @@
+.instruction-header {
+  margin: 1rem;
+  position: relative;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+  color: rgb(14, 180, 102);
+}
+
+.instruction-text {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+mat-card {
+  margin-top: 1rem;
+  margin: 10px;
+}
+
+mat-accordion {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+table {
+  width: 100%;
+}

@@ -1,0 +1,9 @@
+<h1>Une erreur est survenu</h1>
+<!--Dialogue d'erreur-->
+<div mat-dialog-content>
+    <p class="mat-body-1">{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+    <button *ngIf="data.login" mat-raised-button routerLink="/auth/login" routerLinkActive="mat-accent" mat-dialog-close>Login</button>
+    <button *ngIf="data.login == false" mat-button mat-dialog-close>OK</button>
+</div>

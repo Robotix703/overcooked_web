@@ -1,0 +1,66 @@
+<div class="recipe-header">
+  <mat-form-field appearance="fill">
+    <mat-label>Nom</mat-label>
+    <input matInput placeholder="Recherche" id="search" (keyup)="search($event)">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="margin-left: 1rem;">
+    <mat-label>Catégorie</mat-label>
+    <mat-select (selectionChange)="selectCategory($event.value)">
+      <mat-option value="">Toutes</mat-option>
+      <mat-option *ngFor="let categoryDisplayed of categoriesRecipe" [value]="categoryDisplayed">
+        {{categoryDisplayed}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <a mat-raised-button color="primary" style="margin-left: 1rem;" routerLink="/recipe/create">Créer Recette</a>
+
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    style="background-color: #303030;" (page)="getRecipesData($event)">
+  </mat-paginator>
+</div>
+
+<mat-spinner *ngIf="isReady == false" class="spinner"></mat-spinner>
+<mat-accordion *ngIf="recipes.length > 0 && isReady">
+  <mat-card *ngFor="let recipe of recipes"
+    [ngStyle]="{'background-color': recipe.category == categoriesRecipe[0]? 'blue' : recipe.category == categoriesRecipe[1]? '#d87600' : 'purple'}">
+    <mat-card-header>
+      <mat-card-title>
+        <a class="recipeLink" [routerLink]="['/recipe/display', recipe._id]">{{ recipe.title }}</a>
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        <p>
+          Pour {{ recipe.numberOfLunch }} repas.
+        </p>
+        <p>
+          En {{ recipe.duration }} minutes.
+        </p>
+        <p *ngIf="recipe.lastCooked">
+          Cuisiné pour la dernière fois le {{ recipe.lastCooked }}
+        </p>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <div class="recipe-image">
+      <img [src]="recipe.imagePath" [alt]="recipe.title">
+    </div>
+    <hr>
+
+    <mat-card-actions>
+      <a mat-raised-button color="primary" [routerLink]="['/recipe/edit', recipe._id]">
+        <mat-icon>edit</mat-icon>
+      </a>
+      <a mat-raised-button color="primary" (click)="addMeal(recipe._id, recipe.numberOfLunch)">Ajouter</a>
+      <button mat-raised-button color="warn" (click)="onDelete(recipe._id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</mat-accordion>
+
+<p class="info-text mat-body-1" *ngIf="recipes.length == 0">Aucune recette</p>
+
+<mat-spinner *ngIf="isLoading" class="loader"></mat-spinner>

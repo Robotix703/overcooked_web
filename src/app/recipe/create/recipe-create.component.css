@@ -1,0 +1,45 @@
+mat-form-field,
+textarea {
+    width: 100%;
+}
+
+mat-spinner {
+    margin: auto;
+}
+
+mat-card {
+    margin-top: 1rem;
+    width: 75%;
+}
+
+.main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type='file'] {
+    visibility: hidden;
+}
+
+.image-preview {
+    height: 20rem;
+    margin: 1rem 0;
+}
+
+.image-preview img {
+    height: 100%;
+}
+
+.recipe-header {
+    margin: 1rem;
+    position: relative;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 1rem;
+    color: rgb(14, 180, 102);
+}

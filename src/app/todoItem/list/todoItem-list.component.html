@@ -1,0 +1,17 @@
+<mat-spinner *ngIf="isReady == false" class="spinner"></mat-spinner>
+<mat-accordion *ngIf="todoItems.length > 0 && isReady">
+  <mat-card *ngFor="let todoItem of todoItems">
+    <mat-card-header>
+      <mat-card-title>
+        {{ todoItem.text }}
+      </mat-card-title>
+    </mat-card-header>
+    <hr>
+
+    <mat-card-actions>
+      <button mat-raised-button color="warn" (click)="onDelete(todoItem._id)"><mat-icon>delete</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+</mat-accordion>
+
+<p class="info-text mat-body-1" *ngIf="todoItems.length == 0">Aucune tache</p>

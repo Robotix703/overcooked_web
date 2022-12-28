@@ -1,0 +1,56 @@
+<h2 class="title">Création Instruction</h2>
+
+<div class="main-div">
+    <mat-card>
+        <form [formGroup]="productForm" (submit)="onSavePost()">
+            <mat-form-field appearance="fill" style="width: 100%; height: 10rem;">
+                <mat-label>Instruction</mat-label>
+                <textarea matInput formControlName='text' placeholder="Instruction" style="width: 100%; height: 10rem;"></textarea>
+            </mat-form-field>
+            <hr>
+            <mat-form-field appearance="fill" style="width: 100%; margin-top: 1rem;">
+                <mat-label>Temps de cuisson</mat-label>
+                <input matInput type="number" placeholder="Temps de cuisson" formControlName="cookingTime">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-label>Ordre</mat-label>
+                <input matInput type="number" placeholder="Ordre dans la recette" formControlName="order">
+            </mat-form-field>
+
+            <h2>Ajouter un ingrédient</h2>
+            <div class="onSameLine">
+                <!--Name-->
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Entrez un nom</mat-label>
+                    <input type="text" placeholder="Nom" aria-label="Nom" matInput [formControl]="ingredientAutoComplete"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <!--Quantity-->
+                <mat-form-field appearance="fill">
+                    <input matInput type="number" placeholder="Quantité"  [formControl]="quantity">
+                </mat-form-field>
+                <button mat-raised-button color="accent" type="button" style="margin-top: 1rem; margin-bottom: 1rem;"
+                    (click)="addIngredient()">Ajouter ingrédient</button>
+            </div>
+
+            <hr>
+            <div class="onSameLine">
+                <h2 style="text-align: center; width: 50%;">Nom de l'ingrédient</h2>
+                <h2 style="text-align: center; width: 50%;">Quantité</h2>
+            </div>
+            <div class="onSameLine" *ngFor="let item of ingredients">
+                <h2 style="text-align: center; width: 50%;">{{item.ingredientName}}</h2>
+                <h2 style="text-align: center; width: 50%;">{{item.quantity}}</h2>
+                <a mat-raised-button color="warn" (click)="deleteIngredient(item.ingredientName)"><mat-icon>delete</mat-icon></a>
+            </div>
+            <hr>
+            <button mat-raised-button color="primary" style="margin-top: 1rem;" type="submit">Sauvegarder</button>
+        </form>
+    </mat-card>
+</div>

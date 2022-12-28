@@ -1,0 +1,40 @@
+<div class="meal-header">
+  <h2 class="title">Liste des repas</h2>
+</div>
+
+<mat-spinner *ngIf="isReady == false" class="spinner"></mat-spinner>
+<mat-accordion *ngIf="meals.length > 0 && isReady">
+  <mat-card *ngFor="let meal of meals" [ngStyle]="{'background-color': meal.background}">
+    <mat-card-header>
+      <mat-card-title>
+        <a class="recipeLink" [routerLink]="['/recipe/displayMeal', meal._id]">{{ meal.title }}</a>
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        Pour {{ meal.numberOfLunch }} repas.
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <div class="meal-image">
+      <img [src]="meal.imagePath" [alt]="meal.title">
+    </div>
+
+    <mat-list *ngIf="!meal.state">
+      <div *ngFor="let missingIngredient of meal.missingIngredients">
+        <mat-list-item>
+          <div>
+            {{missingIngredient.ingredientName}} - {{missingIngredient.quantity}} {{missingIngredient.unitOfMeasure}}
+          </div>
+        </mat-list-item>
+      </div>
+    </mat-list>
+
+    <mat-card-actions>
+      <a mat-raised-button color="warn" *ngIf="meal.state" (click)="consume(meal._id)">Consommer</a>
+      <a mat-raised-button color="primary" (click)="setHighPrio(meal._id)"><mat-icon>priority_high</mat-icon></a>
+      <a mat-raised-button color="warn" style="float: right;" (click)="delete(meal._id)"><mat-icon>delete</mat-icon></a>
+    </mat-card-actions>
+  </mat-card>
+</mat-accordion>
+
+<p class="info-text mat-body-1" *ngIf="meals.length == 0">Aucun Repas</p>

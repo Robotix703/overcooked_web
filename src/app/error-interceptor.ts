@@ -8,21 +8,17 @@ import { ErrorComponent } from './error/error.component';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-
   constructor(private dialog: MatDialog) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-
         this.dialog.open(ErrorComponent, {
           data: {
-            message: error.error ? error.error : "Une erreur inconnu est arrivé",
-            login: error.error ? (error.error.split(' ')[0] === "Auth") : false
+            message: error.error ? error.error.message : "Une erreur inconnu est arrivé",
+            login: error.url?.endsWith('Login')
           }
         });
-
         return throwError(error);
       })
     );

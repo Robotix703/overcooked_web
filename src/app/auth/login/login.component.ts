@@ -11,7 +11,6 @@ import { AuthService } from '../auth.service';
 
 export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
-
   private authStatusSub: Subscription = new Subscription();
 
   constructor(public authService: AuthService) { };
@@ -31,6 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.authService.login(form.value.email, form.value.password);
+    this.authService.login(form.value.apiKey);
   }
 }

@@ -2,16 +2,11 @@
   <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+      <!--API Key-->
       <mat-form-field>
-        <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required email>
-        <mat-error *ngIf="emailInput.invalid">Entrez un email valide</mat-error>
+        <input matInput name="apiKey" type="text" ngModel #apikeyInput="ngModel" placeholder="API Key" required>
+        <mat-error *ngIf="apikeyInput.invalid">Entrez une API Key</mat-error>
       </mat-form-field>
-
-      <mat-form-field>
-        <input matInput name="password" type="password" ngModel #passwordInput="ngModel" placeholder="Mot de passe" required>
-        <mat-error *ngIf="passwordInput.invalid">Entrez un mot de passe</mat-error>
-      </mat-form-field>
-
       <button mat-raised-button color="primary" type="submit">Connexion</button>
     </form>
   </mat-card>

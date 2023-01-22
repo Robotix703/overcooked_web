@@ -35,6 +35,7 @@ export class AuthService {
           this.authStatus.next(true);
           this.isAuthenticated = true;
 
+          this.apiKey = apiKey;
           this.saveAuthData(apiKey);
           this.router.navigate(['/']);
         }

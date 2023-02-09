@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TagCreateComponent } from './create/tag-create.component';
 import { TagListComponent } from './list/tag-list.component';
 import { AngularMaterialModule } from '../angular-material.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -11,7 +13,9 @@ import { AngularMaterialModule } from '../angular-material.component';
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class TagModule { }

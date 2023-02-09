@@ -11,8 +11,12 @@ export class TagService {
 
   constructor(private http: HttpClient) { }
 
-  createTag(name: string, color: string, path: string){
+  createTag(name: string, image: string){
+    const tagData = new FormData();
+    tagData.append("name", name);
+    tagData.append("image", image, name);
 
+    return this.http.post<Tag>(URL_BACKEND, tagData);
   }
 
   getTags(){

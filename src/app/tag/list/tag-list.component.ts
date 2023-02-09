@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Tag } from '../tag.model';
 import { TagService } from '../tag.service';
 
@@ -12,7 +13,7 @@ export class TagListComponent implements OnInit {
   isLoading: boolean = false;
   tags: Tag[] = [];
 
-  constructor(private tagService: TagService) { }
+  constructor(private tagService: TagService, public route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getTags();

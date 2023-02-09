@@ -17,6 +17,8 @@ import { PantryListComponent } from './pantry/list/pantry-list.component';
 import { PantryCreateComponent } from './pantry/create/pantry-create.component';
 import { TodoItemListComponent } from './todoItem/list/todoItem-list.component';
 import { RecipeDisplayComponent } from './recipe/display/recipe-display.component';
+import { TagListComponent } from './tag/list/tag-list.component';
+import { TagCreateComponent } from './tag/create/tag-create.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -106,6 +108,17 @@ const routes: Routes = [
     children: [
       {
         path: '', component: TodoItemListComponent
+      }
+    ]
+  },
+  {
+    path: 'tag',
+    children: [
+      {
+        path: '', component: TagListComponent
+      },
+      {
+        path: 'create', component: TagCreateComponent
       }
     ]
   }

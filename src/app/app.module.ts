@@ -23,6 +23,7 @@ import { RecipeModule } from './recipe/recipe.module';
 import { MealModule } from './meal/meal.module';
 import { PantryModule } from './pantry/pantry.module';
 import { TodoItemModule } from './todoItem/todoItem.module';
+import { TagModule } from './tag/tag.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TodoItemModule } from './todoItem/todoItem.module';
     RecipeModule,
     MealModule,
     PantryModule,
-    TodoItemModule
+    TodoItemModule,
+    TagModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

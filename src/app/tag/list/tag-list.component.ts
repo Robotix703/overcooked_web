@@ -26,4 +26,10 @@ export class TagListComponent implements OnInit {
       this.tags = data;
     });
   }
+
+  deleteTag(tagId: string){
+    this.tagService.deleteTag(tagId).subscribe(result => {
+      this.getTags();
+    });
+  }
 }

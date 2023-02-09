@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TagService } from '../tag.service';
 import { mimeType } from './mime-type.validator';
 
@@ -13,7 +14,7 @@ export class TagCreateComponent implements OnInit {
   formulaire: FormGroup = new FormGroup({});
   imagePreview: string = "";
 
-  constructor(private tagService: TagService) { }
+  constructor(private tagService: TagService, private router: Router) { }
 
   ngOnInit(): void {
     this.formulaire = new FormGroup({
@@ -46,7 +47,7 @@ export class TagCreateComponent implements OnInit {
       this.formulaire.value.name,
       this.formulaire.value.image
     ).subscribe(result => {
-      console.log(result);
+      this.router.navigate(["/tag/"]);
     })
   }
 }

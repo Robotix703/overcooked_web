@@ -22,4 +22,8 @@ export class TagService {
   getTags(){
     return this.http.get<Tag[]>(URL_BACKEND);
   }
+
+  deleteTag(tagId: string){
+    return this.http.delete<any>(URL_BACKEND + tagId);
+  }
 }

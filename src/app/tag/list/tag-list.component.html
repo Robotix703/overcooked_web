@@ -16,6 +16,12 @@
         <div class="tag-image">
             <img [src]="tag.image">
         </div>
+
+        <mat-card-actions>
+            <button mat-raised-button color="warn" (click)="deleteTag(tag._id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
     </mat-card>
 </mat-accordion>
 

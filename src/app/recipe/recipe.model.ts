@@ -8,6 +8,8 @@ export interface Recipe {
   category: string
   duration: number
   lastCooked: Date | undefined | string
+  composition: string | null
+  tags: string[]
 }
 
 export interface PrettyRecipe {

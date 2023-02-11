@@ -1,0 +1,29 @@
+<h2 class="title">Ajout Tag</h2>
+
+<div class="main-div">
+    <mat-card>
+      <form [formGroup]="formulaire" (submit)="onSavePost()">
+        <!--Nom-->
+        <mat-form-field>
+          <input matInput type="text" formControlName='name' placeholder="Nom">
+          <mat-error *ngIf="formulaire.get('name')!.invalid">Entrez un nom</mat-error>
+        </mat-form-field>
+  
+        <!--File-->
+        <div>
+          <button mat-stroked-button type="button" (click)=filePicker.click()>Image</button>
+          <input style="margin-left: 2rem;" type=file #filePicker (change)="onImagePicked($event)">
+        </div>
+  
+        <!--Preview-->
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview !== null">
+          <img [src]="imagePreview">
+        </div>
+  
+        <hr>
+        <!--Imput-->
+        <button mat-raised-button color="primary" type="submit"
+          style="margin-top: 1rem;">Sauvegarder tag</button>
+      </form>
+    </mat-card>
+  </div>

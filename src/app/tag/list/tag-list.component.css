@@ -1,0 +1,52 @@
+.tag-header {
+    margin: 1rem;
+    position: relative;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 1rem;
+    color: rgb(14, 180, 102);
+}
+
+mat-card {
+    margin-top: 1rem;
+    width: 20rem;
+    margin: 10px;
+}
+
+mat-accordion {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tag-image {
+    max-width: 100%;
+    height: auto;
+    size: cover;
+}
+
+.tag-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.onSameLine {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+a.pantryLink {
+    color: #fff;
+    text-decoration: none;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-spinner {
+    margin: auto;
+}

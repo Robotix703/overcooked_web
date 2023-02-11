@@ -1,0 +1,28 @@
+<div class="tag-header">
+    <h2 class="title">Liste des Tags</h2>
+    <a mat-raised-button color="primary" routerLink="/tag/create">Ajouter tag</a>
+</div>
+
+<mat-spinner *ngIf="isLoading == true" class="spinner"></mat-spinner>
+
+<mat-accordion *ngIf="tags.length > 0 && isLoading == false">
+    <mat-card *ngFor="let tag of tags">
+        <mat-card-header>
+            <mat-card-title>
+                <h1>{{ tag.name }}</h1>
+            </mat-card-title>
+        </mat-card-header>
+
+        <div class="tag-image">
+            <img [src]="tag.image">
+        </div>
+
+        <mat-card-actions>
+            <button mat-raised-button color="warn" (click)="deleteTag(tag._id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</mat-accordion>
+
+<p class="info-text mat-body-1" *ngIf="tags.length == 0">Aucun éléments</p>

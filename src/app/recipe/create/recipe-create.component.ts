@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { mimeType } from "./mime-type.validator";
 
 import { RecipeService } from "../recipe.service"
 import { categoriesRecipe, Recipe } from '../recipe.model';
@@ -23,7 +22,6 @@ export class RecipeCreateComponent implements OnInit {
   categoriesRecipe = categoriesRecipe;
 
   formulaire: FormGroup = new FormGroup({});
-  imagePreview: string = "";
   editMode: boolean = false;
   recipeID: string = "";
 
@@ -93,7 +91,7 @@ export class RecipeCreateComponent implements OnInit {
             this.formulaire.setValue({
               title: recipe.title,
               numberOfLunch: recipe.numberOfLunch,
-              image: recipe.imagePath,
+              image: "",
               category: recipe.category,
               duration: recipe.duration
             });
@@ -114,7 +112,9 @@ export class RecipeCreateComponent implements OnInit {
       numberOfLunch: new FormControl(null, {
         validators: [Validators.required, Validators.min(1)]
       }),
-      image: new FormControl(null, { validators: [Validators.required], asyncValidators: [mimeType] }),
+      imageUrl: new FormControl(null, { 
+        validators: [Validators.required] 
+      }),
       category: new FormControl(null, {
         validators: [Validators.required]
       }),
@@ -122,19 +122,6 @@ export class RecipeCreateComponent implements OnInit {
         validators: [Validators.required, Validators.min(1)]
       })
     });
-  }
-
-  onImagePicked(event: Event) {
-    const file = (event.target as HTMLInputElement).files![0];
-    const reader = new FileReader();
-
-    this.formulaire.patchValue({ image: file });
-    this.formulaire.get('image')!.updateValueAndValidity();
-
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    }
-    reader.readAsDataURL(file);
   }
 
   onSavePost() {
@@ -158,7 +145,7 @@ export class RecipeCreateComponent implements OnInit {
       this.RecipeService.addRecipe(
         this.formulaire.value.title,
         this.formulaire.value.numberOfLunch,
-        this.formulaire.value.image,
+        this.formulaire.value.imageUrl,
         this.formulaire.value.category,
         this.formulaire.value.duration,
         tagsId);

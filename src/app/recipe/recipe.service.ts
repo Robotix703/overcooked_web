@@ -14,16 +14,15 @@ export class RecipeService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addRecipe(title: string, numberOfLunch: number, image: File, category: string, duration: number, tags: string[]) {
-    const recipeData = new FormData();
-    recipeData.append("title", title);
-    recipeData.append("numberOfLunch", numberOfLunch.toString());
-    recipeData.append("image", image, title);
-    recipeData.append("category", category);
-    recipeData.append("duration", duration.toString());
-    recipeData.append("tags", JSON.stringify(tags));
-
-    this.http.post<{id: string, recipe: Recipe}>(URL_BACKEND, recipeData)
+  addRecipe(title: string, numberOfLunch: number, imageUrl: string, category: string, duration: number, tags: string[]) {
+    this.http.post<{id: string, recipe: Recipe}>(URL_BACKEND + "createRecipeWithImageUrl", {
+      title: title,
+      numberOfLunch: numberOfLunch,
+      imageUrl: imageUrl,
+      category: category,
+      duration: duration,
+      tags: JSON.stringify(tags)
+    })
       .subscribe((responseData: {id: string, recipe: Recipe}) => {
         this.router.navigate(["/instruction/list/" + responseData.recipe._id]);
       });

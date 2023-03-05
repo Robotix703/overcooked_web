@@ -14,16 +14,16 @@ export class IngredientService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addIngredient(name: string, consumable: boolean, image: File, unitOfMeasure: string, shelfLife: number | null, freezable: boolean) {
+  addIngredient(name: string, consumable: boolean, imageUrl: string, unitOfMeasure: string, shelfLife: number | null, freezable: boolean) {
     const ingredientData = new FormData();
     ingredientData.append("name", name);
     ingredientData.append("consumable", consumable.toString());
-    ingredientData.append("image", image, name);
+    ingredientData.append("imageUrl", imageUrl);
     ingredientData.append("unitOfMeasure", unitOfMeasure);
     ingredientData.append("shelfLife", shelfLife ? shelfLife.toString() : "");
     ingredientData.append("freezable", freezable.toString());
 
-    this.http.post<Ingredient>(URL_BACKEND, ingredientData)
+    this.http.post<Ingredient>(URL_BACKEND + "createWithImageURL", ingredientData)
       .subscribe((responseData: Ingredient) => {
         this.router.navigate(["/ingredient"]);
       });

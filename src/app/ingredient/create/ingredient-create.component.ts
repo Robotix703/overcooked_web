@@ -4,8 +4,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { IngredientService } from '../ingredient.service';
 import { categories, Ingredient, unitOfMeasures } from "../ingredient.model";
 
-import { mimeType } from "./mime-type.validator";
-
 @Component({
   selector: 'app-ingredient-create',
   templateUrl: './ingredient-create.component.html',
@@ -15,7 +13,6 @@ import { mimeType } from "./mime-type.validator";
 export class IngredientCreateComponent implements OnInit {
 
   formulaire: FormGroup = new FormGroup({});
-  imagePreview: string = "";
 
   ingredientCategories = categories;
   ingredientUnitOfMeasures = unitOfMeasures;
@@ -37,7 +34,7 @@ export class IngredientCreateComponent implements OnInit {
               name: result.name,
               consumable: result.consumable,
               unitOfMeasure: result.unitOfMeasure,
-              image: result.imagePath,
+              imageUrl: "",
               shelfLife: result.shelfLife ?? null,
               freezable: result.freezable
             });
@@ -58,8 +55,8 @@ export class IngredientCreateComponent implements OnInit {
       shelfLife: new FormControl(null, {
         validators: []
       }),
-      image: new FormControl(null, {
-        validators: [Validators.required], asyncValidators: [mimeType]
+      imageUrl: new FormControl(null, {
+        validators: [Validators.required]
       }),
       freezable: new FormControl(null, {
         validators: []
@@ -67,21 +64,7 @@ export class IngredientCreateComponent implements OnInit {
     });
   }
 
-  onImagePicked(event: Event) {
-    const file = (event.target as HTMLInputElement).files![0];
-    const reader = new FileReader();
-
-    this.formulaire.patchValue({ image: file });
-    this.formulaire.get('image')!.updateValueAndValidity();
-
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    }
-    reader.readAsDataURL(file);
-  }
-
   async onSavePost() {
-    console.log(this.formulaire.invalid)
     if (this.formulaire.invalid) return;
 
     this.IngredientService.duplicateIngredientCheck(this.formulaire.value.name).subscribe((isDuplicate: boolean) => {
@@ -104,7 +87,7 @@ export class IngredientCreateComponent implements OnInit {
         this.IngredientService.addIngredient(
           this.formulaire.value.name,
           this.formulaire.value.consumable ? this.formulaire.value.consumable : false,
-          this.formulaire.value.image,
+          this.formulaire.value.imageUrl,
           this.formulaire.value.unitOfMeasure,
           this.formulaire.value.shelfLife,
           this.formulaire.value.freezable ? this.formulaire.value.freezable : false

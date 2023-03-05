@@ -15,7 +15,7 @@ export class RecipeService {
   constructor(private http: HttpClient, private router: Router) { }
 
   addRecipe(title: string, numberOfLunch: number, imageUrl: string, category: string, duration: number, tags: string[]) {
-    this.http.post<{id: string, recipe: Recipe}>(URL_BACKEND + "createRecipeWithImageUrl", {
+    this.http.post<{id: string, recipe: Recipe}>(URL_BACKEND, {
       title: title,
       numberOfLunch: numberOfLunch,
       imageUrl: imageUrl,

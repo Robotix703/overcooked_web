@@ -22,7 +22,7 @@ export interface PrettyRecipe {
 }
 
 export const categoriesRecipe = [
-  "Entrée",
+  "Accompagnement",
   "Plat",
   "Dessert"
 ]

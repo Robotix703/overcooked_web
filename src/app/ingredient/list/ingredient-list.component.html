@@ -7,16 +7,11 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" style="margin-left: 1rem;">
-      <mat-label>Limite</mat-label>
-      <mat-select (selectionChange)="changeLimit($event.value)">
-        <mat-option value="10">10</mat-option>
-        <mat-option value="25">25</mat-option>
-        <mat-option value="50">50</mat-option>
-      </mat-select>
-    </mat-form-field>
-
     <a mat-raised-button color="primary" routerLink="/ingredient/create" style="margin: 1rem;">Ajouter Ingrédient</a>
+
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      style="background-color: #303030;" (page)="getIngredientData($event)">
+    </mat-paginator>
   </div>
 
   <!--Body-->

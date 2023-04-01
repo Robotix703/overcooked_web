@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { RecipeService } from "../recipe.service"
+import { ToolsService } from '../../tools/tools.service';
 import { categoriesRecipe, Recipe } from '../recipe.model';
 import { TagService } from 'src/app/tag/tag.service';
 import { Tag } from 'src/app/tag/tag.model';
@@ -10,6 +11,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { map, Observable } from 'rxjs';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { fetchedData } from 'src/app/tools/tools.module';
 
 @Component({
   selector: 'app-recipe-create',
@@ -20,6 +22,8 @@ import { MatChipInputEvent } from '@angular/material/chips';
 export class RecipeCreateComponent implements OnInit {
 
   categoriesRecipe = categoriesRecipe;
+
+  marmitonLink: string = "";
 
   formulaire: FormGroup = new FormGroup({});
   editMode: boolean = false;
@@ -40,7 +44,11 @@ export class RecipeCreateComponent implements OnInit {
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete!: MatAutocomplete;
 
-  constructor(public RecipeService: RecipeService, public route: ActivatedRoute, private tagService: TagService) { 
+  constructor(
+    public RecipeService: RecipeService,
+    public route: ActivatedRoute,
+    private tagService: TagService,
+    private ToolsService: ToolsService) { 
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       map((tagName: string | null) => tagName ? this._filter(tagName) : this.tagsName.slice()));
   }
@@ -150,5 +158,24 @@ export class RecipeCreateComponent implements OnInit {
         this.formulaire.value.duration,
         tagsId);
     }
+  }
+
+  onGetRecipeFromMarmiton(){
+    this.ToolsService.getDataFromMarmiton(this.marmitonLink)
+    .subscribe((data: fetchedData) => {
+      if(!data) return;
+      
+      this.formulaire.setValue({
+        title: data.title,
+        numberOfLunch: data.numberOfLunch,
+        imageUrl: data.imageSRC,
+        duration: data.duration,
+        category: categoriesRecipe[1]
+      });
+    });
+  }
+
+  addLink(event: any){
+    this.marmitonLink = event.target.value;
   }
 }

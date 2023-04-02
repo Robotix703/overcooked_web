@@ -32,9 +32,14 @@
         <input matInput type="number" formControlName='shelfLife' placeholder="Durée de conservation">
         <mat-error *ngIf="formulaire.get('shelfLife')!.invalid">Entrez une durée de conservation</mat-error>
       </mat-form-field>
+      <div class="row">
+        <p>{{shelfLifeIndication}}</p>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+        <button mat-raised-button color="accent" style="margin-top: 1rem;" (click)="getShelfLifeFromChatGPT()">Durée de conservation</button>
+      </div>
 
       <!--Image URL-->
-      <mat-form-field>
+      <mat-form-field *ngIf="editMode == false">
         <input matInput type="text" formControlName='imageUrl' placeholder="URL de l'image">
         <mat-error *ngIf="formulaire.get('imageUrl')!.invalid">Entrez un URL</mat-error>
       </mat-form-field>

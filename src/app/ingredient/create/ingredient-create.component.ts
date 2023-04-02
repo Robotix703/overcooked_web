@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { IngredientService } from '../ingredient.service';
 import { categories, Ingredient, unitOfMeasures } from "../ingredient.model";
+import { ToolsService } from 'src/app/tools/tools.service';
 
 @Component({
   selector: 'app-ingredient-create',
@@ -20,7 +21,10 @@ export class IngredientCreateComponent implements OnInit {
   editMode: boolean = false;
   ingredientID: string = "";
 
-  constructor(public IngredientService: IngredientService, public route: ActivatedRoute) { }
+  isLoading: boolean = false;
+  shelfLifeIndication: string = "";
+
+  constructor(public IngredientService: IngredientService, public route: ActivatedRoute, private ToolsService: ToolsService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -56,7 +60,7 @@ export class IngredientCreateComponent implements OnInit {
         validators: []
       }),
       imageUrl: new FormControl(null, {
-        validators: [Validators.required]
+        validators: []
       }),
       freezable: new FormControl(null, {
         validators: []
@@ -94,5 +98,15 @@ export class IngredientCreateComponent implements OnInit {
         );
       }
     })
+  }
+
+  getShelfLifeFromChatGPT() {
+    if(this.formulaire.value.name == null) return;
+
+    this.isLoading = true;
+    this.ToolsService.getShelfLifeFromChatGPT(this.formulaire.value.name).subscribe((result: string) => {
+      this.shelfLifeIndication = result;
+      this.isLoading = false;
+    });
   }
 }

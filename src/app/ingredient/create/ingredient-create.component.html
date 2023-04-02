@@ -35,7 +35,6 @@
       <div class="row">
         <p>{{shelfLifeIndication}}</p>
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-        <button mat-raised-button color="accent" style="margin-top: 1rem;" (click)="getShelfLifeFromChatGPT()">Durée de conservation</button>
       </div>
 
       <!--Image URL-->
@@ -50,5 +49,6 @@
       <button mat-raised-button *ngIf="editMode == true" color="primary" type="submit"
         style="margin-top: 1rem;">Modifier ingrédient</button>
     </form>
+    <button mat-raised-button color="accent" style="margin-top: 1rem;" (click)="getShelfLifeFromChatGPT()">Durée de conservation</button>
   </mat-card>
 </div>

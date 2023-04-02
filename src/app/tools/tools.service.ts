@@ -15,10 +15,10 @@ export class ToolsService {
     constructor(private http: HttpClient, private router: Router) { }
 
     getDataFromMarmiton(url: string): Observable<fetchedData> {
-        return this.http.get<fetchedData>(URL_BACKEND + `/extractFromMarmiton?url=${url}`);
+        return this.http.get<fetchedData>(URL_BACKEND + `extractFromMarmiton?url=${url}`);
     }
 
     getShelfLifeFromChatGPT(ingredientName: string): Observable<string> {
-        return this.http.get<string>(URL_BACKEND + `/shelfLifeFromChatGPT?ingredientName=${ingredientName}`);
+        return this.http.get<string>(URL_BACKEND + `shelfLifeFromChatGPT?ingredientName=${ingredientName}`);
     }
 }

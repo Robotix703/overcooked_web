@@ -43,6 +43,8 @@ export class InstructionCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.quantity.setValue(1);
+    
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("recipeID")) {
         this.recipeID = paramMap.get('recipeID') || "";
@@ -116,7 +118,7 @@ export class InstructionCreateComponent implements OnInit {
         order: this.productForm.value.order
       });
       this.ingredientAutoComplete.setValue("");
-      this.quantity.setValue(null);
+      this.quantity.setValue(1);
     }
   }
 

@@ -40,7 +40,6 @@ export class RecipeCreateComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
   
-
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete!: MatAutocomplete;
 
@@ -99,7 +98,7 @@ export class RecipeCreateComponent implements OnInit {
             this.formulaire.setValue({
               title: recipe.title,
               numberOfLunch: recipe.numberOfLunch,
-              image: "",
+              imageUrl: "",
               category: recipe.category,
               duration: recipe.duration
             });
@@ -121,7 +120,7 @@ export class RecipeCreateComponent implements OnInit {
         validators: [Validators.required, Validators.min(1)]
       }),
       imageUrl: new FormControl(null, { 
-        validators: [Validators.required] 
+        validators: [] 
       }),
       category: new FormControl(null, {
         validators: [Validators.required]

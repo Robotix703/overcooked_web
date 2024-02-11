@@ -24,16 +24,6 @@
         <a mat-raised-button color="primary" [routerLink]="['/pantry/edit', pantry._id]">
           <mat-icon>edit</mat-icon>
         </a>
-        <div *ngIf="ingredient.ingredientFreezable && (pantry.frozen == false || pantry.frozen == undefined)">
-          <a mat-raised-button color="primary" (click)="freezePantry(pantry._id)"><img src="assets/snowflake-solid.svg" width="20"></a>
-        </div>
-        <div *ngIf="pantry.frozen == true">
-          <a mat-button color="primary"><img src="assets/snowflake-solid.svg" class="snowflak-filter" width="20"></a>
-        </div>
-        <a mat-raised-button color="warn" (click)="buyAgain(ingredient.ingredientID, ingredient.ingredientName, pantry.quantity, pantry._id)"
-          style="margin-right: 1rem;">
-          <mat-icon>refresh</mat-icon>
-        </a>
         <a mat-raised-button color="warn" (click)="deletePantry(pantry)">
           <mat-icon>delete</mat-icon>
         </a>

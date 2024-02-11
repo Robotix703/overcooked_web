@@ -31,8 +31,6 @@
         <mat-dialog-content>
           <h3 *ngIf="ingredient.consumable">Consommé avec la recette</h3>
           <h3>Unité : {{ingredient.unitOfMeasure}}</h3>
-          <h3 *ngIf="ingredient.shelfLife > 0">Durée de conservation : {{ingredient.shelfLife}} J</h3>
-          <div *ngIf="ingredient.freezable"><img src="assets/snowflake-solid.svg" width="30"></div>
         </mat-dialog-content>
 
         <hr>

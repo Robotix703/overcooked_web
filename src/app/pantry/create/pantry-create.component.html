@@ -29,10 +29,7 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-
-      <!--Freezable-->
-      <mat-checkbox formControlName='frozen' style="margin-bottom: 1rem;">Congelé</mat-checkbox>
-
+      
       <hr>
       <!--Imput-->
       <button mat-raised-button *ngIf="editMode == false" color="primary" type="submit"

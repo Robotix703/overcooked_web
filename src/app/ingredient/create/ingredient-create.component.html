@@ -13,10 +13,6 @@
       <!--Consumable-->
       <mat-checkbox formControlName='consumable' style="margin-bottom: 1rem;">Consommable</mat-checkbox>
 
-      <!--Freezable-->
-      <mat-checkbox formControlName='freezable' style="margin-bottom: 1rem; margin-left: 1rem;">Congelable
-      </mat-checkbox>
-
       <!--Unit of measure-->
       <mat-form-field appearance="fill">
         <mat-label>Unité de mesure</mat-label>
@@ -26,16 +22,6 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-      <!--shelfLife-->
-      <mat-form-field>
-        <input matInput type="number" formControlName='shelfLife' placeholder="Durée de conservation">
-        <mat-error *ngIf="formulaire.get('shelfLife')!.invalid">Entrez une durée de conservation</mat-error>
-      </mat-form-field>
-      <div class="row">
-        <p>{{shelfLifeIndication}}</p>
-        <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-      </div>
 
       <!--Image URL-->
       <mat-form-field *ngIf="editMode == false">

@@ -99,14 +99,4 @@ export class IngredientCreateComponent implements OnInit {
       }
     })
   }
-
-  getShelfLifeFromChatGPT() {
-    if(this.formulaire.value.name == null) return;
-
-    this.isLoading = true;
-    this.ToolsService.getShelfLifeFromChatGPT(this.formulaire.value.name).subscribe((result: string) => {
-      this.shelfLifeIndication = result;
-      this.isLoading = false;
-    });
-  }
 }

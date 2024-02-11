@@ -24,10 +24,6 @@
         <a mat-raised-button color="primary" [routerLink]="['/pantry/edit', pantry._id]">
           <mat-icon>edit</mat-icon>
         </a>
-        <a mat-raised-button color="warn" (click)="buyAgain(ingredient.ingredientID, ingredient.ingredientName, pantry.quantity, pantry._id)"
-          style="margin-right: 1rem;">
-          <mat-icon>refresh</mat-icon>
-        </a>
         <a mat-raised-button color="warn" (click)="deletePantry(pantry)">
           <mat-icon>delete</mat-icon>
         </a>

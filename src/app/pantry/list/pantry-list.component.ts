@@ -56,10 +56,4 @@ export class PantryListComponent implements OnInit, OnDestroy {
         this.getIngredientInventory();
       })
   }
-
-  buyAgain(ingredientID: string, ingredientName: string, quantity: number, pantryID: string) {
-    this.PantryService.buyAgain(ingredientID, ingredientName, quantity, pantryID).subscribe((result) => {
-      this.getIngredientInventory();
-    });
-  }
 }

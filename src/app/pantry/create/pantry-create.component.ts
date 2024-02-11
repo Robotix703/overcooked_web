@@ -40,8 +40,7 @@ export class PantryCreateComponent implements OnInit {
         this.IngredientService.getIngredientByID(ingredientID).subscribe((result) => {
           this.formulaire.setValue({
             quantity: null,
-            expirationDate: null,
-            frozen: false
+            expirationDate: null
           });
           this.ingredientAutoComplete.setValue(result.name);
         });
@@ -54,8 +53,7 @@ export class PantryCreateComponent implements OnInit {
         this.PantryService.getPantryByID(this.pantryID).subscribe((result) => {
           this.formulaire.setValue({
             quantity: result.quantity,
-            expirationDate: result.expirationDate,
-            frozen: result.frozen ?? false
+            expirationDate: result.expirationDate
           });
           this.ingredientAutoComplete.setValue(result.ingredientName);
         });
@@ -75,10 +73,7 @@ export class PantryCreateComponent implements OnInit {
       quantity: new FormControl(null, {
         validators: [Validators.required]
       }),
-      expirationDate: new FormControl(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)),
-      frozen: new FormControl(null, {
-        validators: []
-      })
+      expirationDate: new FormControl(new Date(Date.now() + 7 * 24 * 60 * 60 * 1000))
     });
   }
 
@@ -90,15 +85,13 @@ export class PantryCreateComponent implements OnInit {
         this.pantryID,
         this.ingredientAutoComplete.value,
         this.formulaire.value.quantity,
-        this.formulaire.value.expirationDate,
-        this.formulaire.value.frozen
+        this.formulaire.value.expirationDate
       )
     } else {
       this.PantryService.createPantry(
         this.ingredientAutoComplete.value,
         this.formulaire.value.quantity,
-        this.formulaire.value.expirationDate,
-        this.formulaire.value.frozen
+        this.formulaire.value.expirationDate
       );
     }
   }

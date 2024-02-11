@@ -22,7 +22,6 @@ export class IngredientCreateComponent implements OnInit {
   ingredientID: string = "";
 
   isLoading: boolean = false;
-  shelfLifeIndication: string = "";
 
   constructor(public IngredientService: IngredientService, public route: ActivatedRoute, private ToolsService: ToolsService) { }
 
@@ -38,9 +37,7 @@ export class IngredientCreateComponent implements OnInit {
               name: result.name,
               consumable: result.consumable,
               unitOfMeasure: result.unitOfMeasure,
-              imageUrl: "",
-              shelfLife: result.shelfLife ?? null,
-              freezable: result.freezable
+              imageUrl: ""
             });
           });
       }
@@ -56,13 +53,7 @@ export class IngredientCreateComponent implements OnInit {
       unitOfMeasure: new FormControl(null, {
         validators: [Validators.required]
       }),
-      shelfLife: new FormControl(null, {
-        validators: []
-      }),
       imageUrl: new FormControl(null, {
-        validators: []
-      }),
-      freezable: new FormControl(null, {
         validators: []
       })
     });
@@ -83,30 +74,16 @@ export class IngredientCreateComponent implements OnInit {
           this.ingredientID,
           this.formulaire.value.name,
           this.formulaire.value.consumable ? this.formulaire.value.consumable : false,
-          this.formulaire.value.unitOfMeasure,
-          this.formulaire.value.shelfLife,
-          this.formulaire.value.freezable ? this.formulaire.value.freezable : false
+          this.formulaire.value.unitOfMeasure
         )
       } else {
         this.IngredientService.addIngredient(
           this.formulaire.value.name,
           this.formulaire.value.consumable ? this.formulaire.value.consumable : false,
           this.formulaire.value.imageUrl,
-          this.formulaire.value.unitOfMeasure,
-          this.formulaire.value.shelfLife,
-          this.formulaire.value.freezable ? this.formulaire.value.freezable : false
+          this.formulaire.value.unitOfMeasure
         );
       }
     })
-  }
-
-  getShelfLifeFromChatGPT() {
-    if(this.formulaire.value.name == null) return;
-
-    this.isLoading = true;
-    this.ToolsService.getShelfLifeFromChatGPT(this.formulaire.value.name).subscribe((result: string) => {
-      this.shelfLifeIndication = result;
-      this.isLoading = false;
-    });
   }
 }

@@ -17,8 +17,4 @@ export class ToolsService {
     getDataFromMarmiton(url: string): Observable<fetchedData> {
         return this.http.get<fetchedData>(URL_BACKEND + `extractFromMarmiton?url=${url}`);
     }
-
-    getShelfLifeFromChatGPT(ingredientName: string): Observable<string> {
-        return this.http.get<string>(URL_BACKEND + `shelfLifeFromChatGPT?ingredientName=${ingredientName}`);
-    }
 }

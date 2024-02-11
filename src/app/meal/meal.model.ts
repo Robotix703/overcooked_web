@@ -25,7 +25,6 @@ export interface stateMeal {
     imagePath: string,
     state: {
         ingredientAvailable: any,
-        ingredientAlmostExpire: any,
         ingredientUnavailable: any
     },
     background: string

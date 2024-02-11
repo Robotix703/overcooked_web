@@ -3,9 +3,7 @@ export interface Ingredient {
   name: string
   imagePath: string
   consumable: boolean,
-  unitOfMeasure: string,
-  shelfLife: number,
-  freezable: boolean
+  unitOfMeasure: string
 }
 
 export const categories = [

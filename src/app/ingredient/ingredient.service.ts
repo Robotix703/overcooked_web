@@ -14,14 +14,12 @@ export class IngredientService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addIngredient(name: string, consumable: boolean, imageUrl: string, unitOfMeasure: string, shelfLife: number | null, freezable: boolean) {
+  addIngredient(name: string, consumable: boolean, imageUrl: string, unitOfMeasure: string) {
     this.http.post<Ingredient>(URL_BACKEND, {
       name: name,
       consumable: consumable,
       imageUrl: imageUrl,
-      unitOfMeasure: unitOfMeasure,
-      shelfLife: shelfLife ? shelfLife.toString() : "",
-      freezable: freezable
+      unitOfMeasure: unitOfMeasure
     })
       .subscribe((responseData: Ingredient) => {
         this.router.navigate(["/ingredient"]);
@@ -48,13 +46,11 @@ export class IngredientService {
     return this.http.get<string[]>(URL_BACKEND + "forAutocomplete");
   }
 
-  updateIngredient(ingredientID: string, name: string, consumable: boolean, unitOfMeasure: string, shelfLife: number | null, freezable: boolean) {
+  updateIngredient(ingredientID: string, name: string, consumable: boolean, unitOfMeasure: string) {
     this.http.put<string>(URL_BACKEND + ingredientID, {
       name: name,
       consumable: consumable,
-      unitOfMeasure: unitOfMeasure,
-      shelfLife: shelfLife,
-      freezable: freezable
+      unitOfMeasure: unitOfMeasure
     })
       .subscribe((result: string) => {
         this.router.navigate(["/ingredient"]);

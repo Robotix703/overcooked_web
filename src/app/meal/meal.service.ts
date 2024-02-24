@@ -37,8 +37,4 @@ export class MealService {
   delete(mealID: string) {
     return this.http.delete(URL_BACKEND + mealID);
   }
-
-  setHighPrio(mealID: string) {
-    return this.http.post<{ status: string }>(URL_BACKEND + "setHighPrio", { mealID: mealID });
-  }
 }

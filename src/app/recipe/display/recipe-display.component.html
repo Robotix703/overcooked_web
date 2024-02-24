@@ -69,9 +69,6 @@
       <div class="instruction-text" style="white-space: pre-line;">
         {{ instruc.text }}
       </div>
-      <div *ngIf="instruc.cookingTime" style="margin-bottom: 1rem;">
-        <mat-icon>timer</mat-icon> {{ instruc.cookingTime }} minutes de cuisson.
-      </div>
       <table mat-table [dataSource]="instruc.composition" class="mat-elevation-z8">
         <!-- Name Column -->
         <ng-container matColumnDef="name">

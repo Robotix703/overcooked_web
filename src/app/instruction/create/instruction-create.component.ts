@@ -53,7 +53,6 @@ export class InstructionCreateComponent implements OnInit {
           this.InstructionService.getInstructionCount(this.recipeID).subscribe((count) => {
             this.productForm.setValue({
               text: null,
-              cookingTime: null,
               order: count + 1
             })
           });
@@ -68,7 +67,6 @@ export class InstructionCreateComponent implements OnInit {
           .subscribe((result: PrettyInstruction) => {
             this.productForm.setValue({
               text: result.text,
-              cookingTime: result.cookingTime ?? null,
               order: result.order
             });
 
@@ -87,9 +85,6 @@ export class InstructionCreateComponent implements OnInit {
     this.productForm = this.fb.group({
       text: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
-      }),
-      cookingTime: new FormControl(null, {
-        validators: []
       }),
       order: new FormControl(null, {
         validators: [Validators.required]
@@ -114,7 +109,6 @@ export class InstructionCreateComponent implements OnInit {
       });
       this.productForm.setValue({
         text: this.productForm.value.text,
-        cookingTime: this.productForm.value.cookingTime,
         order: this.productForm.value.order
       });
       this.ingredientAutoComplete.setValue("");
@@ -140,16 +134,14 @@ export class InstructionCreateComponent implements OnInit {
         this.productForm.value.text,
         this.recipeID,
         simpleIngredients,
-        this.productForm.value.order,
-        this.productForm.value.cookingTime
+        this.productForm.value.order
       );
     } else {
       this.InstructionService.addInstruction(
         this.productForm.value.text,
         simpleIngredients,
         this.recipeID,
-        this.productForm.value.order,
-        this.productForm.value.cookingTime
+        this.productForm.value.order
       );
     }
   }

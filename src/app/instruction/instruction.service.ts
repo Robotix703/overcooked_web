@@ -14,14 +14,13 @@ export class InstructionService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  addInstruction(text: string, ingredients: { ingredientName: string, quantity: number }[], recipeID: string, order: number, cookingTime: number = 0) {
+  addInstruction(text: string, ingredients: { ingredientName: string, quantity: number }[], recipeID: string, order: number) {
     let instructionData: any = {
       text: text,
       ingredients: ingredients,
       recipeID: recipeID,
       order: order
     }
-    if (cookingTime != 0) instructionData.cookingTime = cookingTime;
 
     this.http.post<Instruction>(URL_BACKEND + "/byIngredientName", instructionData)
       .subscribe((responseData: Instruction) => {
@@ -45,13 +44,12 @@ export class InstructionService {
     return this.http.get<PrettyInstruction>(URL_BACKEND + `byID?instructionID=${instructionID}`);
   }
 
-  updateInstruction(instructionID: string, text: string, recipeID: string, ingredients: { ingredientName: string, quantity: number }[], order: number, cookingTime: number = 0) {
+  updateInstruction(instructionID: string, text: string, recipeID: string, ingredients: { ingredientName: string, quantity: number }[], order: number) {
     let instructionData: any = {
       text: text,
       ingredients: ingredients,
       order: order
     }
-    if (cookingTime != 0) instructionData.cookingTime = cookingTime;
 
     this.http.put<string>(URL_BACKEND + instructionID, instructionData)
       .subscribe((responseData: string) => {

@@ -4,7 +4,6 @@ export interface Instruction {
     ingredientsID: string[]
     quantity: number[]
     order: number
-    cookingTime: number
 }
 
 export interface Composition {
@@ -19,6 +18,5 @@ export interface PrettyInstruction {
     text: string,
     recipeID: string,
     composition: Composition[],
-    order: number,
-    cookingTime: number | null
+    order: number
 }

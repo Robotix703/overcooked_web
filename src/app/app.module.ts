@@ -52,7 +52,6 @@ import { TagModule } from './tag/tag.module';
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

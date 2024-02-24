@@ -14,7 +14,7 @@ export class TagService {
   createTag(name: string, image: string){
     const tagData = new FormData();
     tagData.append("name", name);
-    tagData.append("image", image, name);
+    tagData.append("image", new Blob([image]), name);
 
     return this.http.post<Tag>(URL_BACKEND, tagData);
   }

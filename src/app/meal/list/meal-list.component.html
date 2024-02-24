@@ -31,7 +31,6 @@
 
     <mat-card-actions>
       <a mat-raised-button color="warn" *ngIf="meal.state" (click)="consume(meal._id)">Consommer</a>
-      <a mat-raised-button color="primary" (click)="setHighPrio(meal._id)"><mat-icon>priority_high</mat-icon></a>
       <a mat-raised-button color="warn" style="float: right;" (click)="delete(meal._id)"><mat-icon>delete</mat-icon></a>
     </mat-card-actions>
   </mat-card>

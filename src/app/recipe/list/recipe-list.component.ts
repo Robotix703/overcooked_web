@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { PageEvent } from '@angular/material/paginator';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { categoriesRecipe, Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
 import { MealService } from "../../meal/meal.service";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { SnackBarComponent } from 'src/app/snackBar/snack-bar.component';
 
 @Component({

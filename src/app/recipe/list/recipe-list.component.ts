@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { categoriesRecipe, Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
-import { MealService } from "../../meal/meal.service";
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { SnackBarComponent } from 'src/app/snackBar/snack-bar.component';
 
@@ -41,7 +40,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     private recipeService: RecipeService,
     private authService: AuthService,
     public route: ActivatedRoute,
-    public MealService: MealService,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -61,14 +59,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         this.getRecipes(this.selectedCategory, this.searchName, this.pageSize, this.currentPage);
       });
     }
-  }
-
-  addMeal(recipeID: string, numberOfLunch: number) {
-    this.isLoading = true;
-    this.MealService.createMeal(recipeID, numberOfLunch, () => {
-      this.openSnackBar();
-      this.isLoading = false;
-    });
   }
 
   openSnackBar() {

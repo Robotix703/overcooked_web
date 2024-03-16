@@ -16,11 +16,9 @@ import { AuthModule } from './auth/auth.module';
 
 //Import des composants
 import { HeaderComponent } from './header/header.component';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { IngredientModule } from './ingredient/ingredient.module';
 import { InstructionModule } from './instruction/instruction.module';
 import { RecipeModule } from './recipe/recipe.module';
-import { MealModule } from './meal/meal.module';
 import { PantryModule } from './pantry/pantry.module';
 import { TodoItemModule } from './todoItem/todoItem.module';
 import { TagModule } from './tag/tag.module';
@@ -38,11 +36,9 @@ import { TagModule } from './tag/tag.module';
     AngularMaterialModule,
     HttpClientModule,
     AuthModule,
-    DashboardModule,
     IngredientModule,
     InstructionModule,
     RecipeModule,
-    MealModule,
     PantryModule,
     TodoItemModule,
     TagModule

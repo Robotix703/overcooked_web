@@ -4,7 +4,6 @@ import { RouterModule, Routes } from "@angular/router"
 import { AuthGuard } from './auth/auth.guard';
 
 //Import des componsants
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { IngredientCreateComponent } from './ingredient/create/ingredient-create.component';
 import { IngredientListComponent } from './ingredient/list/ingredient-list.component';
@@ -12,7 +11,6 @@ import { InstructionCreateComponent } from './instruction/create/instruction-cre
 import { RecipeCreateComponent } from './recipe/create/recipe-create.component';
 import { RecipeListComponent } from './recipe/list/recipe-list.component';
 import { InstructionListComponent } from './instruction/list/instruction-list.component';
-import { MealListComponent } from './meal/list/meal-list.component';
 import { PantryListComponent } from './pantry/list/pantry-list.component';
 import { PantryCreateComponent } from './pantry/create/pantry-create.component';
 import { TodoItemListComponent } from './todoItem/list/todoItem-list.component';
@@ -21,7 +19,7 @@ import { TagListComponent } from './tag/list/tag-list.component';
 import { TagCreateComponent } from './tag/create/tag-create.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: RecipeListComponent },
   {
     path: 'auth',
     children: [
@@ -65,9 +63,6 @@ const routes: Routes = [
         path: 'create', component: RecipeCreateComponent
       },
       {
-        path: '', component: RecipeListComponent
-      },
-      {
         path: 'edit/:recipeID', component: RecipeCreateComponent
       },
       {
@@ -75,14 +70,6 @@ const routes: Routes = [
       },
       {
         path: 'displayMeal/:mealID', component: RecipeDisplayComponent
-      }
-    ]
-  },
-  {
-    path: 'meal',
-    children: [
-      {
-        path: '', component: MealListComponent
       }
     ]
   },

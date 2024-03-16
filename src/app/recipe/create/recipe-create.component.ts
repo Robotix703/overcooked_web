@@ -12,6 +12,7 @@ import { map, Observable } from 'rxjs';
 import { fetchedData } from 'src/app/tools/tools.module';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { PrettyInstruction } from 'src/app/instruction/instruction.model';
 
 @Component({
   selector: 'app-recipe-create',
@@ -25,7 +26,7 @@ export class RecipeCreateComponent implements OnInit {
 
   marmitonLink: string = "";
 
-  formulaire: FormGroup = new FormGroup({});
+  recipeInfos: FormGroup = new FormGroup({});
   editMode: boolean = false;
   recipeID: string = "";
 
@@ -39,6 +40,10 @@ export class RecipeCreateComponent implements OnInit {
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
+
+  instructions: PrettyInstruction[] = [];
+  instructionText: string[] = [];
+  instructionOrder: number[] = [];
   
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete!: MatAutocomplete;
@@ -95,7 +100,7 @@ export class RecipeCreateComponent implements OnInit {
           this.editMode = true;
           this.recipeID = paramMap.get('recipeID') || "";
           this.RecipeService.getRecipe(this.recipeID).subscribe((recipe: Recipe) => {
-            this.formulaire.setValue({
+            this.recipeInfos.setValue({
               title: recipe.title,
               numberOfLunch: recipe.numberOfLunch,
               imageUrl: "",
@@ -112,7 +117,7 @@ export class RecipeCreateComponent implements OnInit {
       });
     });
 
-    this.formulaire = new FormGroup({
+    this.recipeInfos = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
@@ -120,7 +125,7 @@ export class RecipeCreateComponent implements OnInit {
         validators: [Validators.required, Validators.min(1)]
       }),
       imageUrl: new FormControl(null, { 
-        validators: [] 
+        validators: []
       }),
       category: new FormControl(null, {
         validators: [Validators.required]
@@ -131,32 +136,62 @@ export class RecipeCreateComponent implements OnInit {
     });
   }
 
-  onSavePost() {
-    if (this.formulaire.invalid) return;
+  onSubmit() {
+    console.log(this.instructions);
+
+    if (this.recipeInfos.invalid) return;
 
     let tagsId: string[] = [];
     for(let i = 0 ; i < this.selectedTags.length ; i++)
     {
       tagsId.push(this.tags[this.tags.findIndex(o => o.name === this.selectedTags[i])]._id);
     }
-
+    console.log(this.recipeInfos.value);
+    
+    /*
     if (this.editMode) {
       this.RecipeService.updateRecipe(
         this.recipeID,
-        this.formulaire.value.title,
-        this.formulaire.value.numberOfLunch,
-        this.formulaire.value.category,
-        this.formulaire.value.duration,
+        this.recipeInfos.value.title,
+        this.recipeInfos.value.numberOfLunch,
+        this.recipeInfos.value.category,
+        this.recipeInfos.value.duration,
         tagsId);
     } else {
       this.RecipeService.addRecipe(
-        this.formulaire.value.title,
-        this.formulaire.value.numberOfLunch,
-        this.formulaire.value.imageUrl,
-        this.formulaire.value.category,
-        this.formulaire.value.duration,
+        this.recipeInfos.value.title,
+        this.recipeInfos.value.numberOfLunch,
+        this.recipeInfos.value.imageUrl,
+        this.recipeInfos.value.category,
+        this.recipeInfos.value.duration,
         tagsId);
     }
+    */
+  }
+
+  addInstruction() {
+    this.instructions.push({
+      _id: "",
+      text: "",
+      recipeID: "",
+      composition: [],
+      order: this.instructions.length + 1
+    });
+
+    this.instructionOrder.push(this.instructions.length);
+  }
+
+  removeInstruction(instruction: PrettyInstruction) {
+    this.instructions.splice(this.instructions.findIndex(e => e.text === instruction.text), 1);
+  }
+
+  addIngredient(index: number) {
+    this.instructions[index].composition.push({
+      name: "",
+      imagePath: "",
+      quantity: 0,
+      unitOfMeasure: ""
+    });
   }
 
   onGetRecipeFromMarmiton(){
@@ -164,7 +199,7 @@ export class RecipeCreateComponent implements OnInit {
     .subscribe((data: fetchedData) => {
       if(!data) return;
       
-      this.formulaire.setValue({
+      this.recipeInfos.setValue({
         title: data.title,
         numberOfLunch: data.numberOfLunch,
         imageUrl: data.imageSRC,

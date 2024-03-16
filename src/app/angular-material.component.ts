@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -24,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     exports: [
+        FormsModule,
         MatToolbarModule,
         MatExpansionModule,
         MatFormFieldModule,

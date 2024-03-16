@@ -20,6 +20,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     exports: [
@@ -42,7 +43,8 @@ import { MatButtonModule } from '@angular/material/button';
         MatChipsModule,
         MatTableModule,
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        MatCheckboxModule
     ]
 })
 

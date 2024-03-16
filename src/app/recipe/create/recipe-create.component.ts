@@ -9,9 +9,9 @@ import { TagService } from 'src/app/tag/tag.service';
 import { Tag } from 'src/app/tag/tag.model';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { map, Observable } from 'rxjs';
-import { MatLegacyAutocomplete as MatAutocomplete, MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
-import { MatLegacyChipInputEvent as MatChipInputEvent } from '@angular/material/legacy-chips';
 import { fetchedData } from 'src/app/tools/tools.module';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-recipe-create',

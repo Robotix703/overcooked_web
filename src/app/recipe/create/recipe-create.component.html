@@ -44,18 +44,18 @@
         <!--Tags-->
         <mat-form-field class="example-chip-list" appearance="fill">
           <mat-label>Tags</mat-label>
-          <mat-chip-list #chipGrid aria-label="Choix de tags">
+          <!--mat-chip-listbox #chipGrid aria-label="Choix de tags">
             <mat-chip *ngFor="let tag of selectedTags" (removed)="remove(tag)">
               {{tag}}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
-          </mat-chip-list>
+          </mat-chip-listbox>
           <input placeholder="Nouveau tag..." #tagInput [formControl]="tagCtrl"
             [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)"/>
+            (matChipInputTokenEnd)="add($event)"/-->
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
             <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
               {{tag}}

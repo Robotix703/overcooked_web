@@ -1,14 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
+import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/auth.service';
 import { categoriesRecipe, Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
-
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
-import { SnackBarComponent } from 'src/app/snackBar/snack-bar.component';
 
 @Component({
   selector: 'app-recipe-list',
@@ -39,8 +36,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   constructor(
     private recipeService: RecipeService,
     private authService: AuthService,
-    public route: ActivatedRoute,
-    public snackBar: MatSnackBar) { }
+    public route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getRecipes("", "", this.pageSize, this.currentPage);
@@ -59,12 +55,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         this.getRecipes(this.selectedCategory, this.searchName, this.pageSize, this.currentPage);
       });
     }
-  }
-
-  openSnackBar() {
-    this.snackBar.openFromComponent(SnackBarComponent, {
-      duration: 500,
-    });
   }
 
   displayRecipes(recipes: Recipe[], count: number) {

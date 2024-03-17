@@ -69,6 +69,21 @@ export class RecipeService {
       })
   }
 
+  updateCompleteRecipe(recipeID: string, title: string, numberOfLunch: number, imageUrl: string, category: string, duration: number, tags: string[], instructions: PrettyInstruction[]) {
+    this.http.put<string>(URL_BACKEND + "updateComplete/" + recipeID, {
+      title: title,
+      numberOfLunch: numberOfLunch,
+      imageUrl: imageUrl,
+      category: category,
+      duration: duration,
+      tags: JSON.stringify(tags),
+      instructions: JSON.stringify(instructions)
+    })
+    .subscribe((result) => {
+      this.router.navigate(["/"]);
+    });
+  }
+
   getPrettyRecipe(recipeID: string = "", mealID: string = "") {
     return this.http.get<PrettyRecipe>(URL_BACKEND + `/prettyRecipe?recipeID=${recipeID}&mealID=${mealID}`);
   }

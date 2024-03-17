@@ -5,6 +5,7 @@ import { environment } from "../../environments/environment";
 
 import { PrettyRecipe, Recipe } from './recipe.model';
 import { Ingredient } from '../ingredient/ingredient.model';
+import { PrettyInstruction } from '../instruction/instruction.model';
 
 const URL_BACKEND = environment.apiURL + "recipe/";
 
@@ -26,6 +27,21 @@ export class RecipeService {
       .subscribe((responseData: {id: string, recipe: Recipe}) => {
         this.router.navigate(["/instruction/list/" + responseData.recipe._id]);
       });
+  }
+
+  addCompleteRecipe(title: string, numberOfLunch: number, imageUrl: string, category: string, duration: number, tags: string[], instructions: PrettyInstruction[]) {
+    this.http.post<{id: string, recipe: Recipe}>(URL_BACKEND + "completeRecipe", {
+      title: title,
+      numberOfLunch: numberOfLunch,
+      imageUrl: imageUrl,
+      category: category,
+      duration: duration,
+      tags: JSON.stringify(tags),
+      instructions: JSON.stringify(instructions)
+    })
+    .subscribe((responseData: {id: string, recipe: Recipe}) => {
+      this.router.navigate(["/"]);
+    });
   }
 
   deleteRecipe(recipeID: string) {

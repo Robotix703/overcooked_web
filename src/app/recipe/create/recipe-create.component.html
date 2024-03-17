@@ -59,7 +59,17 @@
             <mat-card-content>
               <!--Name-->
               <mat-form-field>
-                <input matInput type="text" [(ngModel)]="ingredient.name" placeholder="Nom">
+                <input type="text"
+                  placeholder="Nom"
+                  aria-label="Number"
+                  matInput
+                  [(ngModel)]="ingredient.name"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                  @for (option of filteredIngredientName | async; track option) {
+                    <mat-option [value]="option">{{option}}</mat-option>
+                  }
+                </mat-autocomplete>
               </mat-form-field>
               <!--Quantity-->
               <mat-form-field>

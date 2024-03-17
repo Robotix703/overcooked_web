@@ -36,7 +36,7 @@ export class RecipeService {
       imageUrl: imageUrl,
       category: category,
       duration: duration,
-      tags: JSON.stringify(tags),
+      tagsId: JSON.stringify(tags),
       instructions: JSON.stringify(instructions)
     })
     .subscribe((responseData: {id: string, recipe: Recipe}) => {
@@ -76,7 +76,7 @@ export class RecipeService {
       imageUrl: imageUrl,
       category: category,
       duration: duration,
-      tags: JSON.stringify(tags),
+      tagsId: JSON.stringify(tags),
       instructions: JSON.stringify(instructions)
     })
     .subscribe((result) => {

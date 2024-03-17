@@ -36,6 +36,16 @@
     </mat-form-field>
   </form>
 
+  <!--Tags-->
+  <mat-form-field>
+    <mat-label>Tags</mat-label>
+    <mat-select matInput [(ngModel)]='selectedTagsId' multiple>
+      @for (option of filteredTags | async; track option) {
+        <mat-option [value]="option._id">{{option.name}}<img [src]="option.image" style="height: 40px; width: 40px;"></mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
   <hr>
 
   <!--Instructions-->

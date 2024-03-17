@@ -18,7 +18,8 @@ export interface PrettyRecipe {
   numberOfLunch: number
   category: string
   duration: number
-  instructions: PrettyInstruction[]
+  instructions: PrettyInstruction[],
+  tagsId: string[]
 }
 
 export const categoriesRecipe = [

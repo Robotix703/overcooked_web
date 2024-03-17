@@ -29,66 +29,36 @@ export class RecipeCreateComponent implements OnInit {
   recipeID: string = "";
 
   tags: Tag[] = [];
-  tagsName: string[] = [];
-  selectedTags: string[] = [];
-  filteredTags: Observable<string[]> = new Observable;
+  selectedTagsId: string[] = [];
+  filteredTags: Observable<Tag[]> = new Observable;
 
   filteredIngredientName: Observable<string[]> = new Observable;
-
-  tagLoaded: boolean = false;
-  selectable = true;
-  removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  tagCtrl = new FormControl();
 
   instructions: PrettyInstruction[] = [];
   instructionText: string[] = [];
   instructionOrder: number[] = [];
-  
-  @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     public RecipeService: RecipeService,
     public route: ActivatedRoute,
     private tagService: TagService,
     private IngredientService: IngredientService) { 
-    this.filteredTags = this.tagCtrl.valueChanges.pipe(
-      map((tagName: string | null) => tagName ? this._filter(tagName) : this.tagsName.slice()));
-  }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.tagsName.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    if ((value || '').trim()) this.selectedTags.push(value.trim());
-    if (input) input.value = '';
-
-    this.tagCtrl.setValue(null);
-  }
-
-  remove(tagName: string): void {
-    const index = this.selectedTags.indexOf(tagName);
-
-    if (index >= 0) this.selectedTags.splice(index, 1);
-  }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.selectedTags.push(event.option.viewValue);
-    this.tagInput.nativeElement.value = '';
-    this.tagCtrl.setValue(null);
   }
 
   ngOnInit() {
+    //Tags
     this.tagService.getTags().subscribe(data => {
-      this.filteredTags = of(data.map(e => e.name));
+      this.filteredTags = of(data);
+      this.tags = data;
     });
 
+    //Ingredients
+    this.IngredientService.getAllIngredientsName().subscribe(data => {
+      this.filteredIngredientName = of(data);
+    });
+
+    //Get Recipe
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("recipeID")) {
         this.editMode = true;
@@ -104,15 +74,13 @@ export class RecipeCreateComponent implements OnInit {
             duration: recipe.duration
           });
 
+          this.selectedTagsId = recipe.tagsId;
           this.instructions = recipe.instructions;
         });
       }
     });
 
-    this.IngredientService.getAllIngredientsName().subscribe(data => {
-      this.filteredIngredientName = of(data);
-    }); 
-
+    //Forms
     this.recipeInfos = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
@@ -134,12 +102,6 @@ export class RecipeCreateComponent implements OnInit {
 
   onSubmit() {
     if (this.recipeInfos.invalid) return;
-
-    let tagsId: string[] = [];
-    for(let i = 0 ; i < this.selectedTags.length ; i++)
-    {
-      tagsId.push(this.tags[this.tags.findIndex(o => o.name === this.selectedTags[i])]._id);
-    }
     
     if (this.editMode) {
       this.RecipeService.updateCompleteRecipe(
@@ -149,7 +111,7 @@ export class RecipeCreateComponent implements OnInit {
         this.recipeInfos.value.imageUrl,
         this.recipeInfos.value.category,
         this.recipeInfos.value.duration,
-        tagsId,
+        this.selectedTagsId,
         this.instructions);
     } else {
       this.RecipeService.addCompleteRecipe(
@@ -158,7 +120,7 @@ export class RecipeCreateComponent implements OnInit {
         this.recipeInfos.value.imageUrl,
         this.recipeInfos.value.category,
         this.recipeInfos.value.duration,
-        tagsId,
+        this.selectedTagsId,
         this.instructions);
     }
   }
